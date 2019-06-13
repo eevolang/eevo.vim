@@ -14,3 +14,7 @@ setl commentstring=;\ %s
 setl define=^\\s*(def\\k*
 setl formatoptions-=t
 setl iskeyword+=+,-,*,/,%,<,=,>,:,$,?,!,@-@,94
+
+if exists('g:paredit_loaded')
+  call PareditInitBuffer()
+endif
