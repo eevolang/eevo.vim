@@ -20,31 +20,36 @@ endif
 
 " built-ins
 syn keyword tispSyntax cons quote void do eval cond
-syn keyword tispSyntax define lambda macro load
+syn keyword tispSyntax define lambda macro load quit
 syn keyword tispSyntax if else when unless let recur
 syn keyword tispSyntax not and or nand nor
 
 " functions
 syn keyword tispFunc type version repl ans
-syn keyword tispFunc nil? void? integer? ratio? decimal? string? symbol?
-syn keyword tispFunc function? primitive? pair? negative? positive? rational?
+syn keyword tispFunc nil? void? string? symbol?
+syn keyword tispFunc function? primitive? pair?
+syn keyword tispFunc integer? ratio? decimal? rational? number?
 
 " math
-syn keyword tispFunc + - * / mod ! = < <= = > >=
-syn keyword tispFunc dec sqr pow root sqrt cbrt exp log log10 logb
+syn keyword tispFunc + - * / ^ mod ! = < <= = > >=
+syn keyword tispFunc dec round truncate floor ceiling
+syn keyword tispFunc sqr root sqrt cbrt exp log log10 logb
 syn keyword tispFunc abs sgn max min numerator denominator
 syn keyword tispFunc sin sinh cos cosh tan tanh
 syn keyword tispFunc arcsin arcsinh arccos arccosh arctan arctanh
+syn keyword tispFunc negative? positive? zero? even? odd?
 
 " i/o
 syn keyword tispFunc read print disp disp-string newline
-syn keyword tispFunc list last apply map
+
+" list
+syn keyword tispFunc list last apply foreach map append member?
 
 " cxr
-syn keyword tispFunc caar cadr cdar cddr caaar caadr cadar caddr cdaar cdadr
-syn keyword tispFunc cddar cdddr caaaar caaadr caadar caaddr cadaar cadadr
-syn keyword tispFunc caddar cadddr cdaaar cdaadr cdadar cdaddr cddaar cddadr
-syn keyword tispFunc cdddar cddddr car cdr first rest
+syn keyword tispFunc car cdr caar cadr cdar cddr caaar caadr cadar caddr cdaar
+syn keyword tispFunc cdadr cddar cdddr caaaar caaadr caadar caaddr cadaar
+syn keyword tispFunc cadadr caddar cadddr cdaaar cdaadr cdadar cdaddr cddaar
+syn keyword tispFunc cddadr cdddar cddddr first rest
 
 " lambda sign
 " syn match tispSyntax /\<[\u03bb]\>/
