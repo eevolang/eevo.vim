@@ -62,9 +62,9 @@ syn keyword tispNote '\CNOTE\ze:\?' contained
 
 syn match tispDelimiter '\<\.\>'
 
-syn keyword tispNumber e pi tau
-syn match tispNumber "[+-]\=\(\.\d\+\|\d\+\(\.\d*\)\=\)\([eE/][-+]\=\d\+\)\="
-syn match tispError ![-#+0-9.][-#+/0-9a-f@i.boxesfdl]*[^-#+/0-9a-f@i.boxesfdl \t\[\]()";][^ \t\[\]()";]*!
+syn keyword tispNumber nil e pi tau
+syn match tispNumber "[+-]\=\(\.\d\+\|\d\+\(\.\d*\)\=\)\([eE][-+]\=\d\+\)\="
+syn match tispNumber "[+-]\=\(\d\+/\d\+\)"
 
 syn match tispSymbol ,\k+, contained
 
