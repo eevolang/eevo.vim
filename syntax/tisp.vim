@@ -27,7 +27,7 @@ syn keyword tispSyntax not and or nand nor
 " functions
 syn keyword tispFunc type version repl ans
 syn keyword tispFunc nil? void? string? symbol?
-syn keyword tispFunc function? primitive? pair?
+syn keyword tispFunc function? primitive? pair? boolean? true? false?
 syn keyword tispFunc integer? ratio? decimal? rational? number?
 
 " math
@@ -40,10 +40,10 @@ syn keyword tispFunc arcsin arcsinh arccos arccosh arctan arctanh
 syn keyword tispFunc negative? positive? zero? even? odd?
 
 " i/o
-syn keyword tispFunc read print disp disp-string newline
+syn keyword tispFunc read parse print disp disp-string newline
 
 " list
-syn keyword tispFunc list last apply foreach map append member?
+syn keyword tispFunc list last nth apply foreach map append assoc member?
 
 " cxr
 syn keyword tispFunc car cdr caar cadr cdar cddr caaar caadr cadar caddr cdaar
