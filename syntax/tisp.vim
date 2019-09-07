@@ -26,9 +26,10 @@ syn keyword tispSyntax not and or nand nor
 
 " functions
 syn keyword tispFunc type version repl ans
-syn keyword tispFunc nil? void? string? symbol?
-syn keyword tispFunc function? primitive? pair? boolean? true? false?
+syn keyword tispFunc nil? empty? void? string? symbol?
+syn keyword tispFunc function? primitive? macro? pair? cons? list?
 syn keyword tispFunc integer? ratio? decimal? rational? number?
+syn keyword tispFunc boolean? true? false?
 
 " math
 syn keyword tispFunc + - * / ^ mod ! = < <= = > >=
