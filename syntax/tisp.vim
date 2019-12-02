@@ -19,32 +19,39 @@ else
 endif
 
 " built-ins
-syn keyword tispSyntax cons quote void do eval cond
-syn keyword tispSyntax define lambda macro load quit
+syn keyword tispSyntax cons quote quasiquote unquote void do eval cond
+syn keyword tispSyntax define lambda defmacro macro load quit error assert
 syn keyword tispSyntax if else when unless let recur
 syn keyword tispSyntax not and or nand nor
 
 " functions
 syn keyword tispFunc type version repl ans
-syn keyword tispFunc nil? empty? void? string? symbol?
-syn keyword tispFunc function? primitive? macro? pair? cons? list?
+syn keyword tispFunc any? nil? empty? void? string? symbol?
+syn keyword tispFunc function? primitive? macro? atom? pair? cons? list?
 syn keyword tispFunc integer? ratio? decimal? rational? number?
 syn keyword tispFunc boolean? true? false?
 
 " math
 syn keyword tispFunc + - * / ^ mod ! = < <= = > >=
 syn keyword tispFunc dec round truncate floor ceiling
-syn keyword tispFunc sqr root sqrt cbrt exp log log10 logb
-syn keyword tispFunc abs sgn max min numerator denominator
+syn keyword tispFunc sqr cube root sqrt cbrt exp log log10 logb
+syn keyword tispFunc abs sgn max min numerator denominator dot
 syn keyword tispFunc sin sinh cos cosh tan tanh
 syn keyword tispFunc arcsin arcsinh arccos arccosh arctan arctanh
+syn keyword tispFunc csc csch sec sech cot coth
+syn keyword tispFunc arccsc arccsch arcsec arcsech arccot arccoth
 syn keyword tispFunc negative? positive? zero? even? odd?
 
 " i/o
-syn keyword tispFunc read parse print disp disp-string newline
+syn keyword tispFunc read parse write print disp disp-string newline
+syn keyword tispNumber stdout stderr
 
 " list
-syn keyword tispFunc list last nth apply foreach map append assoc member?
+syn keyword tispFunc list list* length last nth count
+syn keyword tispFunc apply map reverse append zip assoc memp member
+
+" stack
+syn keyword tispFunc push push! pop pop! peak swap swap!
 
 " cxr
 syn keyword tispFunc car cdr caar cadr cdar cddr caaar caadr cadar caddr cdaar
