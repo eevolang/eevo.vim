@@ -19,3 +19,5 @@ setl lispwords+=recur
 if exists('g:paredit_loaded')
   call PareditInitBuffer()
 endif
+
+let b:undo_ftplugin = "setlocal lisp< comments< commentstring< define< formatoptions< iskeyword< lispwords<"
