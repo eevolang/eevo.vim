@@ -19,21 +19,22 @@ else
 endif
 
 " built-ins
-syn keyword tispSyntax cons quote quasiquote unquote void do eval cond
-syn keyword tispSyntax define lambda defmacro macro load quit error assert
-syn keyword tispSyntax if else when unless let recur
+syn keyword tispSyntax cons quote quasiquote unquote void do do0 eval cond
+syn keyword tispSyntax set! define lambda defmacro macro load quit error assert
+syn keyword tispSyntax if else when unless let recur switch
 syn keyword tispSyntax not and or nand nor
+syn keyword tispSyntax type bool pair integer decimal string symbol get var
 
 " functions
-syn keyword tispFunc type version repl ans
-syn keyword tispFunc any? nil? empty? void? string? symbol?
-syn keyword tispFunc function? primitive? macro? atom? pair? cons? list?
+syn keyword tispFunc any? nil? empty? void? atom? string? symbol?
+syn keyword tispFunc function? primitive? macro? procedure? pair? cons? list?
 syn keyword tispFunc integer? ratio? decimal? rational? number?
 syn keyword tispFunc boolean? true? false?
+syn keyword tispFunc version repl ans doc default
 
 " math
 syn keyword tispFunc + - * / ^ mod ! = < <= = > >=
-syn keyword tispFunc dec round truncate floor ceiling
+syn keyword tispFunc inc dec round truncate floor ceiling
 syn keyword tispFunc sqr cube root sqrt cbrt exp log log10 logb
 syn keyword tispFunc abs sgn max min numerator denominator dot
 syn keyword tispFunc sin sinh cos cosh tan tanh
@@ -47,17 +48,18 @@ syn keyword tispFunc read parse write print disp disp-string newline
 syn keyword tispNumber stdout stderr
 
 " list
-syn keyword tispFunc list list* length last nth count
-syn keyword tispFunc apply map reverse append zip assoc memp member
+syn keyword tispFunc list list* length last nth head tail count
+syn keyword tispFunc apply map filter compose reverse append zip assoc memp member
 
 " stack
-syn keyword tispFunc push push! pop pop! peak swap swap!
+syn keyword tispFunc push push! pop pop! peek swap swap!
 
 " cxr
 syn keyword tispFunc car cdr caar cadr cdar cddr caaar caadr cadar caddr cdaar
 syn keyword tispFunc cdadr cddar cdddr caaaar caaadr caadar caaddr cadaar
 syn keyword tispFunc cadadr caddar cadddr cdaaar cdaadr cdadar cdaddr cddaar
 syn keyword tispFunc cddadr cdddar cddddr first rest
+syn keyword tispFunc second third forth fifth sixth seventh eighth ninth tenth
 
 " lambda sign
 " syn match tispSyntax /\<[\u03bb]\>/
@@ -70,23 +72,28 @@ syn keyword tispNote '\CNOTE\ze:\?' contained
 
 syn match tispDelimiter '\<\.\>'
 
-syn keyword tispNumber nil e pi tau
+syn keyword tispNumber e pi tau
 syn match tispNumber "[+-]\=\(\.\d\+\|\d\+\(\.\d*\)\=\)\([eE][-+]\=\d\+\)\="
 syn match tispNumber "[+-]\=\(\d\+/\d\+\)"
 
 syn match tispSymbol ,\k+, contained
 
-syn keyword tispBoolean t ()
+syn keyword tispBoolean t () nil true false
 
 syn cluster tispNormal  contains=tispSyntax,tispFunc,tispDelimiter
 syn cluster tispQuotedStuff  contains=tispSymbol
 syn cluster tispQuotedOrNormal  contains=tispDelimiter
 
-syn region tispQuoted matchgroup=Delimiter start="['`]" end='[ \t()";]'me=e-1 contains=@tispQuotedStuff,@tispQuotedOrNormal
-syn region tispQuoted matchgroup=Delimiter start="['`](" matchgroup=Delimiter end=")" contains=@tispQuotedStuff,@tispQuotedOrNormal
+syn region tispStruc matchgroup=Delimiter start="(" matchgroup=Delimiter end=")" contains=ALL
+syn region tispQuoted matchgroup=Delimiter start="['`]" end=![ \t()";]!me=e-1 contains=ALL
 
-syn region tispQuoted matchgroup=Delimiter start="#['`]"rs=s+2 end='[ \t()";]'re=e-1,me=e-1 contains=@tispQuotedStuff,@tispQuotedOrNormal
-syn region tispQuoted matchgroup=Delimiter start="#['`]("rs=s+3 matchgroup=Delimiter end=")"re=e-1 contains=@tispQuotedStuff,@tispQuotedOrNormal
+syn region tispQuoted matchgroup=Delimiter start="['`](" matchgroup=Delimiter end=")" contains=ALL
+
+syn region tispUnquote matchgroup=Delimiter start="," end=![ \t()";]!me=e-1 contains=ALL
+syn region tispUnquote matchgroup=Delimiter start=",@" end=![ \t()";]!me=e-1 contains=ALL
+
+syn region tispUnquote matchgroup=Delimiter start=",(" end=")" contains=ALL
+syn region tispUnquote matchgroup=Delimiter start=",@(" end=")" contains=ALL
 
 " Comments
 syn cluster tispNormal  add=tispQuoted,tispComment
@@ -98,38 +105,25 @@ syn sync match matchPlace grouphere NONE "^[^ \t]"
 " ... i.e. synchronize on a line that starts at the left margin
 
 " Define the default highlighting.
-" For version 5.7 and earlier: only when not done already
-" For version 5.8 and later: only when an item doesn't have highlighting yet
-if version >= 508 || !exists("did_tisp_syntax_inits")
-  if version < 508
-    let did_tisp_syntax_inits = 1
-    command -nargs=+ HiLink hi link <args>
-  else
-    command -nargs=+ HiLink hi def link <args>
-  endif
+hi def link tispSyntax             Statement
+hi def link tispFunc               Function
 
-  HiLink tispSyntax             Statement
-  HiLink tispFunc               Function
+hi def link tispString             String
+hi def link tispChar               Character
+hi def link tispBoolean            Boolean
 
-  HiLink tispString             String
-  HiLink tispChar               Character
-  HiLink tispBoolean            Boolean
+hi def link tispNumber             Number
+hi def link tispNumberError        Error
 
-  HiLink tispNumber             Number
-  HiLink tispNumberError        Error
+hi def link tispQuoted             Structure
+hi def link tispSymbol             Structure
 
-  HiLink tispQuoted             Structure
-  HiLink tispSymbol             Structure
+hi def link tispDelimiter          Delimiter
+hi def link tispConstant           Constant
 
-  HiLink tispDelimiter          Delimiter
-  HiLink tispConstant           Constant
-
-  HiLink tispComment            Comment
-  HiLink tispTodo               Todo
-  HiLink tispNote               SpecialComment
-  HiLink tispError              Error
-
-  delcommand HiLink
-endif
+hi def link tispComment            Comment
+hi def link tispTodo               Todo
+hi def link tispNote               SpecialComment
+hi def link tispError              Error
 
 let b:current_syntax = "tisp"
