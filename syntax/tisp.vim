@@ -20,10 +20,10 @@ endif
 
 " built-ins
 syn keyword tispSyntax cons quote quasiquote unquote void do do0 eval cond
-syn keyword tispSyntax set! define lambda defmacro macro load quit error assert
+syn keyword tispSyntax set! def lambda defmacro macro load quit error assert
 syn keyword tispSyntax if else when unless let recur switch
 syn keyword tispSyntax not and or nand nor
-syn keyword tispSyntax type bool pair integer decimal string symbol get var
+syn keyword tispSyntax typeof bool pair integer decimal string symbol get var
 
 " functions
 syn keyword tispFunc any? nil? empty? void? atom? string? symbol?
@@ -44,7 +44,7 @@ syn keyword tispFunc arccsc arccsch arcsec arcsech arccot arccoth
 syn keyword tispFunc negative? positive? zero? even? odd?
 
 " i/o
-syn keyword tispFunc read parse write print disp disp-string newline
+syn keyword tispFunc read parse write run print println display displayln newline
 syn keyword tispNumber stdout stderr
 
 " list
