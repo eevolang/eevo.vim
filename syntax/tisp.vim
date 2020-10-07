@@ -19,11 +19,11 @@ else
 endif
 
 " built-ins
-syn keyword tispSyntax cons quote quasiquote unquote void do do0 eval cond
+syn keyword tispSyntax cons quote quasiquote unquote do do0 eval cond
 syn keyword tispSyntax set! def lambda defmacro macro load quit error assert
 syn keyword tispSyntax if else when unless let recur switch
 syn keyword tispSyntax not and or nand nor
-syn keyword tispSyntax typeof bool pair integer decimal string symbol get var
+syn keyword tispSyntax typeof Void Bool Pair Int Dec Str Sym get
 
 " functions
 syn keyword tispFunc any? nil? empty? void? atom? string? symbol?
@@ -36,7 +36,7 @@ syn keyword tispFunc version repl ans doc default
 syn keyword tispFunc + - * / ^ mod ! = < <= = > >=
 syn keyword tispFunc inc dec round truncate floor ceiling
 syn keyword tispFunc sqr cube root sqrt cbrt exp log log10 logb
-syn keyword tispFunc abs sgn max min numerator denominator dot
+syn keyword tispFunc abs sgn max min numerator denominator dot norm
 syn keyword tispFunc sin sinh cos cosh tan tanh
 syn keyword tispFunc arcsin arcsinh arccos arccosh arctan arctanh
 syn keyword tispFunc csc csch sec sech cot coth
@@ -78,7 +78,7 @@ syn match tispNumber "[+-]\=\(\d\+/\d\+\)"
 
 syn match tispSymbol ,\k+, contained
 
-syn keyword tispBoolean t () nil true false
+syn keyword tispBoolean True () Nil False
 
 syn cluster tispNormal  contains=tispSyntax,tispFunc,tispDelimiter
 syn cluster tispQuotedStuff  contains=tispSymbol
