@@ -26,8 +26,8 @@ syn keyword tispSyntax not and or nand nor
 syn keyword tispSyntax typeof Void Bool Pair Int Dec Str Sym get
 
 " functions
-syn keyword tispFunc any? nil? empty? void? atom? string? symbol?
-syn keyword tispFunc function? primitive? macro? procedure? pair? cons? list?
+syn keyword tispFunc any? nil? empty? void? atom? string? symbol? pair? cons? list?
+syn keyword tispFunc function? specialform? primitive? macro? builtin? procedure?
 syn keyword tispFunc integer? ratio? decimal? rational? number?
 syn keyword tispFunc boolean? true? false?
 syn keyword tispFunc version repl ans doc default
@@ -44,7 +44,7 @@ syn keyword tispFunc arccsc arccsch arcsec arcsech arccot arccoth
 syn keyword tispFunc negative? positive? zero? even? odd?
 
 " i/o
-syn keyword tispFunc read parse write run print println display displayln newline
+syn keyword tispFunc read parse write save open run print println display displayln newline
 syn keyword tispNumber stdout stderr
 
 " list
@@ -78,7 +78,7 @@ syn match tispNumber "[+-]\=\(\d\+/\d\+\)"
 
 syn match tispSymbol ,\k+, contained
 
-syn keyword tispBoolean True () Nil False
+syn keyword tispBoolean True () Nil False it
 
 syn cluster tispNormal  contains=tispSyntax,tispFunc,tispDelimiter
 syn cluster tispQuotedStuff  contains=tispSymbol
