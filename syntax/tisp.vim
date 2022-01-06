@@ -20,7 +20,7 @@ endif
 
 " built-ins
 syn keyword tispSyntax cons quote quasiquote unquote do do0 eval cond
-syn keyword tispSyntax set! def lambda defmacro macro load quit error assert
+syn keyword tispSyntax set! def defmacro Func Macro load quit error assert
 syn keyword tispSyntax if else when unless let recur switch
 syn keyword tispSyntax not and or nand nor
 syn keyword tispSyntax typeof Void Bool Pair Int Dec Str Sym get
@@ -33,7 +33,7 @@ syn keyword tispFunc boolean? true? false?
 syn keyword tispFunc version repl ans doc default
 
 " math
-syn keyword tispFunc + - * / ^ mod ! = < <= = > >=
+syn keyword tispFunc + - * / ^ mod ! = /= < <= = > >=
 syn keyword tispFunc inc dec round truncate floor ceiling
 syn keyword tispFunc sqr cube root sqrt cbrt exp log log10 logb
 syn keyword tispFunc abs sgn max min numerator denominator dot norm
@@ -47,9 +47,13 @@ syn keyword tispFunc negative? positive? zero? even? odd?
 syn keyword tispFunc read parse write save open run print println display displayln newline
 syn keyword tispNumber stdout stderr
 
+" os
+syn keyword tispFunc cd! pwd now time
+
 " list
 syn keyword tispFunc list list* length last nth head tail count
-syn keyword tispFunc apply map filter compose reverse append zip assoc memp member
+syn keyword tispFunc apply map convert assoc filter keep remove memp member everyp? every?
+syn keyword tispFunc compose reverse append zip
 
 " stack
 syn keyword tispFunc push push! pop pop! peek swap swap!
