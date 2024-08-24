@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: tisp
 " Author:   Ed van Bruggen <ed@edryd.org>
-" URL:      edryd.org/projects/tisp.html
+" URL:      edryd.org/projects/tisp
 
 if version < 600
   syntax clear

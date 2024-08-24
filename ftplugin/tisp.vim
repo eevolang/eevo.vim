@@ -1,7 +1,7 @@
 " Vim filetype plugin
 " Language: tisp
 " Author:   Ed van Bruggen <ed@edryd.org>
-" URL:      edryd.org/projects/tisp.html
+" URL:      edryd.org/projects/tisp
 
 if exists("b:did_ftplugin")
   finish
@@ -15,6 +15,8 @@ setl define=^\\s*(def\\k*
 setl formatoptions-=t
 setl iskeyword+=+,-,*,/,%,<,=,>,:,$,?,!,@-@,94
 setl lispwords+=def,recur,switch
+setl foldmethod=expr
+setl foldexpr=getline(v:lnum)=~'^;;;'?'>1':1
 
 if exists('g:paredit_loaded')
   call PareditInitBuffer()
