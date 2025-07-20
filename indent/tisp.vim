@@ -1,7 +1,7 @@
 " Vim filetype plugin
-" Language: tisp
+" Language: eevp
 " Author:   Ed van Bruggen <ed@edryd.org>
-" URL:      edryd.org/projects/tisp
+" URL:      eevo.pub
 
 if exists("b:did_indent")
   finish

@@ -1,7 +1,7 @@
 " Vim syntax file
-" Language: tisp
+" Language: eevo
 " Author:   Ed van Bruggen <ed@edryd.org>
-" URL:      edryd.org/projects/tisp
+" URL:      eevo.pub
 
 if version < 600
   syntax clear
@@ -10,7 +10,7 @@ elseif exists("b:current_syntax")
 endif
 
 " highlight unmatched parens
-syn match tispError '[]})]'
+syn match eevoError '[]})]'
 
 if version < 600
   set iskeyword=33,35-39,42-58,60-90,94,95,97-122,126,_
@@ -19,89 +19,97 @@ else
 endif
 
 " built-ins
-syn keyword tispSyntax cons quote quasiquote unquote do do0 eval cond
-syn keyword tispSyntax set! def defmacro Func Macro load quit error assert
-syn keyword tispSyntax if else when unless let recur switch
-syn keyword tispSyntax not and or nand nor
-syn keyword tispSyntax typeof Void Bool Pair Int Dec Str Sym get
+syn keyword eevoSyntax quote quasiquote unquote do do0 eval cond records
+syn keyword eevoSyntax def defmacro Func Macro load quit error assert procprops
+syn keyword eevoSyntax if else when unless let recur switch undefine! defined?
+" TODO color operators differently
+syn keyword eevoSyntax not and or nand nor
+syn keyword eevoSyntax typeof Void Bool Pair Int Dec Str Sym
 
 " functions
-syn keyword tispFunc any? nil? empty? void? atom? string? symbol? pair? cons? list?
-syn keyword tispFunc function? specialform? primitive? macro? builtin? procedure?
-syn keyword tispFunc integer? ratio? decimal? rational? number?
-syn keyword tispFunc boolean? true? false?
-syn keyword tispFunc version repl ans doc default
+syn keyword eevoFunc any? nil? empty? void? atom? string? symbol? pair? cons? list?
+syn keyword eevoFunc function? specialform? primitive? macro? builtin? procedure? record?
+syn keyword eevoFunc integer? ratio? decimal? rational? number?
+syn keyword eevoFunc boolean? true? false?
+syn keyword eevoFunc version repl ans doc default
 
 " math
-syn keyword tispFunc + - * / ^ mod ! = /= < <= = > >=
-syn keyword tispFunc inc dec round truncate floor ceiling
-syn keyword tispFunc sqr cube root sqrt cbrt exp log log10 logb
-syn keyword tispFunc abs sgn max min numerator denominator dot norm
-syn keyword tispFunc sin sinh cos cosh tan tanh
-syn keyword tispFunc arcsin arcsinh arccos arccosh arctan arctanh
-syn keyword tispFunc csc csch sec sech cot coth
-syn keyword tispFunc arccsc arccsch arcsec arcsech arccot arccoth
-syn keyword tispFunc negative? positive? zero? even? odd?
+syn keyword eevoFunc + - * / ^ *^ mod ! = /= < <= = > >=
+syn keyword eevoFunc inc dec round truncate floor ceiling
+syn keyword eevoFunc sqr cube root sqrt cbrt exp log log10 logb
+syn keyword eevoFunc abs sgn max min numerator denominator dot norm
+syn keyword eevoFunc sin sinh cos cosh tan tanh
+syn keyword eevoFunc arcsin arcsinh arccos arccosh arctan arctanh
+syn keyword eevoFunc csc csch sec sech cot coth
+syn keyword eevoFunc arccsc arccsch arcsec arcsech arccot arccoth
+syn keyword eevoFunc negative? positive? zero? even? odd?
+syn keyword eevoFunc half double factorial gcd deg rad
 
 " i/o
-syn keyword tispFunc read parse write save open run print println display displayln newline
-syn keyword tispNumber stdout stderr
+syn keyword eevoFunc read parse write print println display displayln newline printerr printerrln
+syn keyword eevoNumber stdout stderr
 
 " os
-syn keyword tispFunc cd! pwd now time
+syn keyword eevoFunc cd! pwd now time
 
 " list
-syn keyword tispFunc list list* length last nth head tail count
-syn keyword tispFunc apply map convert assoc filter keep remove memp member everyp? every?
-syn keyword tispFunc compose reverse append zip
+syn keyword eevoFunc list list* length last nth head tail count
+syn keyword eevoFunc apply map convert assoc filter keep remove memp member everyp? every?
+syn keyword eevoFunc compose reverse append zip
 
 " stack
-syn keyword tispFunc push push! pop pop! peek swap swap!
+syn keyword eevoFunc push pop peek swap
 
-" cxr
-syn keyword tispFunc car cdr caar cadr cdar cddr caaar caadr cadar caddr cdaar
-syn keyword tispFunc cdadr cddar cdddr caaaar caaadr caadar caaddr cadaar
-syn keyword tispFunc cadadr caddar cadddr cdaaar cdaadr cdadar cdaddr cddaar
-syn keyword tispFunc cddadr cdddar cddddr first rest
-syn keyword tispFunc second third forth fifth sixth seventh eighth ninth tenth
+" first and rest
+syn keyword eevoFunc fst rst snd ffst rfst rrst
+syn keyword eevoFunc fffst ffrst frfst frrst rffst rfrst rrfst rrrst
+
+" string
+syn keyword eevoFunc strfmt split
 
 " lambda sign
-" syn match tispSyntax /\<[\u03bb]\>/
+" syn match eevoSyntax /\<[\u03bb]\>/
 
-syn region tispString start='\%(\\\)\@<!"' skip='\\[\\"]' end='"' contains=@Spell
+" TODO : and [] as sym end
 
-syn match tispComment ';.*$' contains=tispTodo,tispNote,@Spell
-syn keyword tispTodo FIXME TODO XXX contained
-syn keyword tispNote '\CNOTE\ze:\?' contained
+" TODO highlight escape sequences
+syn region eevoString start='\%(\\\)\@<!"' skip='\\[\\"]' end='"' contains=@Spell
 
-syn match tispDelimiter '\<\.\>'
+" TODO ;;; for section title
+syn match eevoComment ';.*$' contains=eevoTodo,eevoNote,@Spell
+syn keyword eevoTodo FIXME TODO XXX contained
+syn keyword eevoNote '\CNOTE\ze:\?' contained
 
-syn keyword tispNumber e pi tau
-syn match tispNumber "[+-]\=\(\.\d\+\|\d\+\(\.\d*\)\=\)\([eE][-+]\=\d\+\)\="
-syn match tispNumber "[+-]\=\(\d\+/\d\+\)"
+syn match eevoDelimiter '\<\.\>'
+" syn match eevoDelimiter ':\+'
 
-syn match tispSymbol ,\k+, contained
+syn keyword eevoNumber e pi tau
+syn match eevoNumber "\<[+-]\=\(\.\d\+\|\d\+\(\.\d*\)\=\)\([eE][-+]\=\d\+\)\=\>"
+" syn match eevoNumber "[+-]\=\(\d\+/\d\+\)"
+syn match eevoNumber "0[xX][0-9a-fA-F]\+"
 
-syn keyword tispBoolean True () Nil False it
+syn match eevoSymbol ,\k+, contained
 
-syn cluster tispNormal  contains=tispSyntax,tispFunc,tispDelimiter
-syn cluster tispQuotedStuff  contains=tispSymbol
-syn cluster tispQuotedOrNormal  contains=tispDelimiter
+syn keyword eevoBoolean True () Nil False it
 
-syn region tispStruc matchgroup=Delimiter start="(" matchgroup=Delimiter end=")" contains=ALL
-syn region tispQuoted matchgroup=Delimiter start="['`]" end=![ \t()";]!me=e-1 contains=ALL
+syn cluster eevoNormal  contains=eevoSyntax,eevoFunc,eevoDelimiter
+syn cluster eevoQuotedStuff  contains=eevoSymbol
+syn cluster eevoQuotedOrNormal  contains=eevoDelimiter
 
-syn region tispQuoted matchgroup=Delimiter start="['`](" matchgroup=Delimiter end=")" contains=ALL
+syn region eevoStruc matchgroup=Delimiter start="(" matchgroup=Delimiter end=")" contains=ALL
+syn region eevoQuoted matchgroup=Delimiter start="['`]" end=![ \t()";]!me=e-1 contains=ALL
 
-syn region tispUnquote matchgroup=Delimiter start="," end=![ \t()";]!me=e-1 contains=ALL
-syn region tispUnquote matchgroup=Delimiter start=",@" end=![ \t()";]!me=e-1 contains=ALL
+syn region eevoQuoted matchgroup=Delimiter start="['`](" matchgroup=Delimiter end=")" contains=ALL
 
-syn region tispUnquote matchgroup=Delimiter start=",(" end=")" contains=ALL
-syn region tispUnquote matchgroup=Delimiter start=",@(" end=")" contains=ALL
+syn region eevoUnquote matchgroup=Delimiter start="," end=![ \t()";]!me=e-1 contains=ALL
+syn region eevoUnquote matchgroup=Delimiter start=",@" end=![ \t()";]!me=e-1 contains=ALL
+
+syn region eevoUnquote matchgroup=Delimiter start=",(" end=")" contains=ALL
+syn region eevoUnquote matchgroup=Delimiter start=",@(" end=")" contains=ALL
 
 " Comments
-syn cluster tispNormal  add=tispQuoted,tispComment
-syn cluster tispQuotedOrNormal  add=tispComment
+syn cluster eevoNormal  add=eevoQuoted,eevoComment
+syn cluster eevoQuotedOrNormal  add=eevoComment
 
 
 " Synchronization and the wrapping up...
@@ -109,25 +117,25 @@ syn sync match matchPlace grouphere NONE "^[^ \t]"
 " ... i.e. synchronize on a line that starts at the left margin
 
 " Define the default highlighting.
-hi def link tispSyntax             Statement
-hi def link tispFunc               Function
+hi def link eevoSyntax             Statement
+hi def link eevoFunc               Function
 
-hi def link tispString             String
-hi def link tispChar               Character
-hi def link tispBoolean            Boolean
+hi def link eevoString             String
+hi def link eevoChar               Character
+hi def link eevoBoolean            Boolean
 
-hi def link tispNumber             Number
-hi def link tispNumberError        Error
+hi def link eevoNumber             Number
+hi def link eevoNumberError        Error
 
-hi def link tispQuoted             Structure
-hi def link tispSymbol             Structure
+hi def link eevoQuoted             Structure
+hi def link eevoSymbol             Structure
 
-hi def link tispDelimiter          Delimiter
-hi def link tispConstant           Constant
+hi def link eevoDelimiter          Delimiter
+hi def link eevoConstant           Constant
 
-hi def link tispComment            Comment
-hi def link tispTodo               Todo
-hi def link tispNote               SpecialComment
-hi def link tispError              Error
+hi def link eevoComment            Comment
+hi def link eevoTodo               Todo
+hi def link eevoNote               SpecialComment
+hi def link eevoError              Error
 
-let b:current_syntax = "tisp"
+let b:current_syntax = "eevo"
