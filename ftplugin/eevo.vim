@@ -9,12 +9,13 @@ endif
 let b:did_ftplugin = 1
 
 setl lisp
+setl expandtab
 setl comments=:;
 setl commentstring=;\ %s
 setl define=^\\s*(def\\k*
 setl formatoptions-=t
-setl iskeyword+=+,-,*,/,%,<,=,>,:,$,?,!,@-@,94
-setl lispwords+=def,recur,switch
+setl iskeyword+=+,-,*,/,%,<,=,>,$,?,!,@-@,94
+setl lispwords+=def,recur,switch,Func,Macro
 setl foldmethod=expr
 setl foldexpr=getline(v:lnum)=~'^;;;'?'>1':1
 
