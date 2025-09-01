@@ -97,6 +97,8 @@ syn cluster eevoQuotedStuff  contains=eevoSymbol
 syn cluster eevoQuotedOrNormal  contains=eevoDelimiter
 
 syn region eevoStruc matchgroup=Delimiter start="(" matchgroup=Delimiter end=")" contains=ALL
+syn region eevoStruc matchgroup=Delimiter start="\[" matchgroup=Delimiter end="]" contains=ALL
+syn region eevoStruc matchgroup=Delimiter start="{" matchgroup=Delimiter end="}" contains=ALL
 syn region eevoQuoted matchgroup=Delimiter start="['`]" end=![ \t()";]!me=e-1 contains=ALL
 
 syn region eevoQuoted matchgroup=Delimiter start="['`](" matchgroup=Delimiter end=")" contains=ALL
